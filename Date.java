@@ -1,8 +1,10 @@
 
-public class Date {
+public class Date implements Comparable<Date> {
 
 	
 	@Override
-	public int compareTo(Date date) { }
+	public int compareTo(Date date) { 
+		return 0;
+	}
 	
 }
