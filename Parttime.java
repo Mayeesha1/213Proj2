@@ -1,4 +1,4 @@
 
-public class Parttime {
+public class Parttime extends Employee {
 
 }
