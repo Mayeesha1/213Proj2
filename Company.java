@@ -22,7 +22,7 @@ public class Company {
 			}
 			count++;
 		}
-		//return  count; //equals numBooks
+		//return  count; //equals numEmployee
 		return -1;
 	}
 	
