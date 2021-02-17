@@ -19,6 +19,39 @@ public class PayrollProcessing {
 	by order of date hired or the employees' department.
 	 */
 	public void run() {
-		//Company company = new Company(); 
+		
+		System.out.println("Payroll Processing starts.");
+		Scanner scanner=new Scanner(System.in);
+		String line=scanner.nextLine();
+		company = new Company();
+		while(!line.equals("Q")) {
+			StringTokenizer st=new StringTokenizer(line,",",false);
+			String command=st.nextToken(); 
+			if(command.equals("AP")) {
+				
+			} else if(command.equals("AF")) {
+				
+			} else if(command.equals("AM")) {
+				
+			} else if(command.equals("R")) {
+				
+			} else if(command.equals("C")) {
+				
+			} else if(command.equals("S")) {
+				
+			} else if(command.equals("PA")) {
+				
+			} else if(command.equals("PH")) {
+				
+			} else if(command.equals("PD")) {
+				
+			} else {
+				System.out.println("Invalid command!");
+			}
+			line = scanner.nextLine();	
+		}
+		System.out.println("Payroll Processing completed."); //quit
+		
+		scanner.close();
 	} 
 }
