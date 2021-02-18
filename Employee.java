@@ -5,6 +5,7 @@ The employee class holds all the main attributes of an employee.
 @author mayeesha, rebecca
 */
 public class Employee {
+	//not sure what attributes an employee has??
 	
 	/**
 	This method calculates the payments for an employee, keeping 

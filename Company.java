@@ -43,7 +43,24 @@ public class Company {
 	when it's full and only add the employee if their profile is valid. 
 	@param employee to be added
 	*/
-	public boolean add(Employee employee) { } 
+	public boolean add(Employee employee) { 
+		if(employee.getDatePublished().isValid()) {
+			if(emplist.length==numEmployee) { //list full
+				grow();
+			} 
+			if(numEmployee==0) {
+				emplist[0] = employee; //all empty slots	
+			}
+			else {
+				int ptr=emplist.length-1;
+				while(emplist[ptr]==null) { //first empty slot
+					ptr--;
+				}
+				emplist[ptr+1] = employee;
+			}
+			numEmployee++; //increase employee count
+		} 
+	} 
 	
 	/**
 	The method to remove an employee from the employee list. The employee is found using 
@@ -52,13 +69,28 @@ public class Company {
 	@param employee to be removed
 	@return true if successfully removed, false if employee not in company
 	*/
-	public boolean remove(Employee employee) { }
+	public boolean remove(Employee employee) { 
+		int index = find(employee);
+		if(index>-1) {
+			for(int i=index; i<emplist.length-1; i++) {
+				emplist[i] = emplist[i+1];
+			}
+			if(numEmployee == emplist.length) { //put a null space
+				emplist[emplist.length-1] = null; 
+			}
+			numEmployee--;
+			return true;
+		}
+		return false;
+	}
 	
 	/**
-	Method to set a part time employees hours. The employees working hours are set here.
+	Method to set a part time employees working hours.
 	@param part time employee's hours to be set
 	*/
-	public boolean setHours(Employee employee) { } 
+	public boolean setHours(Employee employee) {
+		
+	} 
 	
 	/**
 	Method to process the payments for the employees in the company. This method is 
