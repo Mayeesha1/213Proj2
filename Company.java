@@ -50,6 +50,7 @@ public class Company {
 			} 
 			if(numEmployee==0) {
 				emplist[0] = employee; //all empty slots	
+				return true;
 			}
 			else {
 				int ptr=emplist.length-1;
@@ -57,9 +58,11 @@ public class Company {
 					ptr--;
 				}
 				emplist[ptr+1] = employee;
+				return true;
 			}
 			numEmployee++; //increase employee count
-		} 
+		}
+		return false;
 	} 
 	
 	/**
@@ -94,7 +97,8 @@ public class Company {
 	
 	/**
 	Method to process the payments for the employees in the company. This method is 
-	to ensure that the employees receive their proper payments by processing them. 
+	to ensure that the employees receive their proper payments by processing them.
+	(better description?) 
 	*/
 	public void processPayments() { } 
 	
@@ -102,7 +106,13 @@ public class Company {
 	Method to print the earning statements for all the employers in the company
 	in the normal order from the employee list
 	 */
-	public void print() { } 
+	public void print() {
+		if(numEmployee>0) {
+			for(int i=0;i<numEmployee;i++) {
+				System.out.println(emplist[i].toString());
+			}
+		}
+	} 
 	
 	/**
 	Method to print the earning statements for all the employers in the company
@@ -115,5 +125,12 @@ public class Company {
 	by the order of date from the employee list
 	 */
 	public void printByDate() { } 
+	/**
+	Getter method for numEmployee so it can be used in another classe
+	@return numEmployee
+	*/
+	public int getnumEmployee() {
+		return numEmployee;
+	}
 	
 }

@@ -51,6 +51,13 @@ public class PayrollProcessing {
 			} else if(command.equals("S")) { //set hours for employee
 				
 			} else if(command.equals("PA")) { //earnings for all employees
+				int NUM_EMPLOYEE = company.getnumEmployee();
+				if(NUM_EMPLOYEE > 0) {
+				System.out.println("--Printing earning statements for all employees--");
+				company.print();
+				} else {
+					System.out.println("Employee database is empty");
+				}	
 				
 			} else if(command.equals("PH")) { //earnings by date hired
 				

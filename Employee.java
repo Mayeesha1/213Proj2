@@ -5,7 +5,15 @@ The employee class holds all the main attributes of an employee.
 @author mayeesha, rebecca
 */
 public class Employee {
-	//not sure what attributes an employee has??
+	//not sure what other instance variables to add for an employee
+	private Profile profile; 
+	
+	public Employee(String name, String department, String date) {
+		profile.setName(name);
+		profile.setDepartment(department);
+		Date datePublished = new Date(date);
+		profile.setDate(datePublished);
+	}
 	
 	/**
 	This method calculates the payments for an employee, keeping 
