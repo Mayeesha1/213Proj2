@@ -44,7 +44,7 @@ public class Company {
 	@param employee to be added
 	*/
 	public boolean add(Employee employee) { 
-		if(employee.getDatePublished().isValid()) {
+		if(employee.getDateHired().isValid()) {
 			if(emplist.length==numEmployee) { //list full
 				grow();
 			} 
@@ -58,9 +58,10 @@ public class Company {
 					ptr--;
 				}
 				emplist[ptr+1] = employee;
-				return true;
+				
 			}
 			numEmployee++; //increase employee count
+			return true;
 		}
 		return false;
 	} 

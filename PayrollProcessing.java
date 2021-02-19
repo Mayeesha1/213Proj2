@@ -44,7 +44,7 @@ public class PayrollProcessing {
 					System.out.println("Employee already in the list.");
 				}
 			} else {
-				//System.out.println("'" + depCode + "' is not a valid department code.");
+				System.out.println("'" + depCode + "' is not a valid department code.");
 			}
 			
 			} else if(command.equals("AF")) { //full-time employee w annual salary

@@ -33,4 +33,12 @@ public class Profile {
 	public void setDate(Date dateHired) {
 		this.dateHired=dateHired;
 	}
+	/**
+	Getter method for date hired of the employee so it can be used in other 
+	classes
+	@return date hired
+	*/
+	public Date getDateHired() {
+		return dateHired;
+	}
 }

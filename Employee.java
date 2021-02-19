@@ -8,11 +8,16 @@ The employee class holds all the main attributes of an employee.
 public class Employee {
 	//not sure what other instance variables to add for an employee
 	private Profile profile; 
+
 	
 	public Employee(String name, String department, Date date) {
 		profile.setName(name);
 		profile.setDepartment(department);
 		profile.setDate(date);
+	}
+	
+	public Date getDateHired() { //REDUNDANT(also in profile class)!! lmk if you know a better way to do it
+		return profile.getDateHired();
 	}
 	
 	/**
@@ -32,6 +37,6 @@ public class Employee {
 	}
 	@Override 
 	public String toString() { 
-		return "hello"; //just for now to make the error go away
+		return "hello"; //just for now to make the error go away so i can test
 	} 
 }
