@@ -30,7 +30,7 @@ public class Profile {
 	in other classes
 	@param date when employee joined
 	*/
-	public void setDate(Date date) {
-		this.dateHired=date;
+	public void setDate(Date dateHired) {
+		this.dateHired=dateHired;
 	}
 }

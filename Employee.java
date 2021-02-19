@@ -1,3 +1,4 @@
+import Proj1.Book;
 
 /**
 The employee class holds all the main attributes of an employee. 
@@ -8,11 +9,10 @@ public class Employee {
 	//not sure what other instance variables to add for an employee
 	private Profile profile; 
 	
-	public Employee(String name, String department, String date) {
+	public Employee(String name, String department, Date date) {
 		profile.setName(name);
 		profile.setDepartment(department);
-		Date datePublished = new Date(date);
-		profile.setDate(datePublished);
+		profile.setDate(date);
 	}
 	
 	/**
@@ -24,7 +24,11 @@ public class Employee {
 	} 
 	@Override
 	public boolean equals(Object obj) {
-		return true; //just for now to make the error go away
+		if(obj instanceof Employee) {
+			Employee employee=(Employee) obj;
+			//return employee.?.equals(this.?); //not sure what to return yet?
+		}
+		return false;
 	}
 	@Override 
 	public String toString() { 

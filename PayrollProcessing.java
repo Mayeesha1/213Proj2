@@ -24,7 +24,7 @@ public class PayrollProcessing {
 		Scanner scanner=new Scanner(System.in);
 		String line=scanner.nextLine();
 		company = new Company();
-		try {
+		//try {
 		while(!line.equals("Q")) {
 			StringTokenizer st=new StringTokenizer(line," ",false);
 			String command=st.nextToken(); 
@@ -33,11 +33,18 @@ public class PayrollProcessing {
 			String name = st.nextToken();
 			String depCode = st.nextToken();
 			String date = st.nextToken();
+			Date datePublished = new Date(date);
+			Employee employee = new Employee(name, depCode, datePublished);
 			String moneyEarned = st.nextToken();
 			if((depCode.equals("CS")) || (depCode.equals("ECE")) || (depCode.equals("IT"))) {
 			    //call add method here and also check if employee already exists or not
+				if(company.add(employee)) {
+					System.out.println("Employee added.");
+				} else {
+					System.out.println("Employee already in the list.");
+				}
 			} else {
-				System.out.println("'" + depCode + "' is not a valid department code.");
+				//System.out.println("'" + depCode + "' is not a valid department code.");
 			}
 			
 			} else if(command.equals("AF")) { //full-time employee w annual salary
@@ -69,12 +76,12 @@ public class PayrollProcessing {
 			line = scanner.nextLine();	
 		 }
 		System.out.println("Payroll Processing completed."); //quit
-
-		}
-		 catch (Exception e) {
-			   System.out.println("Exception error! Please recheck input!");
-			 }
-		
 		scanner.close();
-	} 
+		//} catch (Exception e) {
+			//  System.out.println("Exception error! Please recheck input!");
+		//	}
+		
+		
+	}
 }
+
