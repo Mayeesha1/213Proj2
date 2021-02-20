@@ -1,3 +1,4 @@
+import Proj1.Book;
 
 /**
 The company class stores all the employees in an array-based list. These employees can 
@@ -93,7 +94,7 @@ public class Company {
 	@param part time employee's hours to be set
 	*/
 	public boolean setHours(Employee employee) {
-		
+		return true; //just for now 
 	} 
 	
 	/**
@@ -109,9 +110,13 @@ public class Company {
 	 */
 	public void print() {
 		if(numEmployee>0) {
+			System.out.println("--Printing earning statements for all employees--");
 			for(int i=0;i<numEmployee;i++) {
 				System.out.println(emplist[i].toString());
 			}
+		}
+		else {
+			System.out.println("Employee database is empty.");
 		}
 	} 
 	
@@ -125,13 +130,83 @@ public class Company {
 	Method to print the earning statements for all the employers in the company
 	by the order of date from the employee list
 	 */
-	public void printByDate() { } 
+	public void printByDate() { 
+		if(numEmployee>0) {
+			System.out.println("--Printing earning statements by date hired--");
+			
+			mergeSortDate(emplist,0,numEmployee-1);
+			for(int i=0;i<numEmployee;i++) {
+				System.out.println(emplist[i].toString());
+			}
+		}
+		else {
+			System.out.println("Employee database is empty.");
+		}
+	} 
+	
 	/**
-	Getter method for numEmployee so it can be used in another classe
-	@return numEmployee
+	Helper method to merge sort the employees in order of dates hired
+	@param employee array
+	@param left index
+	@param right index
 	*/
-	public int getnumEmployee() {
-		return numEmployee;
+	public static void mergeSortDate(Employee[] emplist, int left, int right) { 
+		if(right<=left) return;
+		int mid=(left+right)/2; //left, right, mid are indexes
+		mergeSortDate(emplist,left,mid);
+		mergeSortDate(emplist,mid+1,right);
+		mergeDate(emplist,left,mid,right);
+	}
+	
+	/**
+	Helper method to merge two arrays together so it can be sorted in order of dates published
+	@param books array
+	@param left index
+	@param mid index
+	@param right index
+	*/
+	public static void mergeDate(Employee[] emplist, int left, int mid, int right) {
+		Employee[] leftEmployee=new Employee[mid-left+1];
+		Employee[] rightEmployee=new Employee[right-mid];
+		for(int i=0;i<mid-left+1;i++) {
+			leftEmployee[i]=emplist[left+i];
+		}
+		for(int j=0;j<right-mid;j++) {
+			rightEmployee[j]=emplist[mid+j+1];
+		}
+		int leftIndex=0;
+		int rightIndex=0;
+		for(int k=left;k<right+1;k++) {
+			if(leftIndex<mid-left+1 && rightIndex<right-mid) { //setter, getter constructors for book
+				if((leftEmployee[leftIndex].getDateHired().getYear()
+								<rightEmployee[rightIndex].getDateHired().getYear())
+						|| (leftEmployee[leftIndex].getDateHired().getYear()
+								==rightEmployee[rightIndex].getDateHired().getYear() 
+							&& leftEmployee[leftIndex].getDateHired().getMonth()
+								<rightEmployee[rightIndex].getDateHired().getMonth())
+						|| (leftEmployee[leftIndex].getDateHired().getYear()
+								==rightEmployee[rightIndex].getDateHired().getYear() 
+							&& leftEmployee[leftIndex].getDateHired().getMonth()
+								==rightEmployee[rightIndex].getDateHired().getMonth() 
+							&& leftEmployee[leftIndex].getDateHired().getDay()
+								<rightEmployee[rightIndex].getDateHired().getDay())) {
+					emplist[k]=leftEmployee[leftIndex];
+					leftIndex++;
+				}
+				else {
+					emplist[k]=rightEmployee[rightIndex];
+					rightIndex++;
+				}
+			}
+			else if(leftIndex<mid-left+1) {
+				emplist[k]=leftEmployee[leftIndex];
+				leftIndex++;
+			}
+			else if(rightIndex<right-mid) {
+				emplist[k]=rightEmployee[rightIndex];
+				rightIndex++;
+			}
+		}
 	}
 	
 }

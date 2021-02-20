@@ -6,6 +6,10 @@ are also fulltime employees. They share the same attributes from the fulltime em
 */
 public class Management extends Fulltime {
 	
+	public Management(String name, String department, Date date) {
+		super(name, department, date);
+	}
+	
 	@Override 
 	public void calculatePayment() { } 
 	@Override

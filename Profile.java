@@ -41,4 +41,20 @@ public class Profile {
 	public Date getDateHired() {
 		return dateHired;
 	}
+	/**
+	Getter method for department code of the employee so it can be used in 
+	other classes
+	@return date hired
+	*/
+	public String getDepCode() {
+		return department;
+	}
+	/**
+	Getter method for the name of the employee so it can be used in other 
+	classes
+	@return name
+	*/
+	public String getName() {
+		return name;
+	}
 }

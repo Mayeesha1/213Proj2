@@ -2,7 +2,7 @@ import java.util.Calendar;
 import java.util.StringTokenizer;
 
 /**
-This Date class stores the day, month, and year from user input in each 
+The Date class stores the day, month, and year from user input in each 
 identified variable and makes sure if a date is valid. 
 @author mayeesha, rebecca
 */
@@ -12,7 +12,16 @@ public class Date implements Comparable<Date> {
 	private int day;
 	
 	/**
-	The method creates the Date object from what was scanned through 
+	This method compares a Date object with another Date object and returns 
+	different numbers if it is less than, greater than, or equal too.
+	@param date object
+	*/
+	@Override
+	public int compareTo(Date date) { 
+		return 0;
+	}
+	/**
+	This method creates the Date object from what was scanned through 
 	user input and puts them in their respective variables. The day, month,
 	and year are separated using String tokenizer.
 	@param date string scanned from user input
@@ -34,7 +43,7 @@ public class Date implements Comparable<Date> {
 	} 
 	
 	/**
-	The method creates the Date object for the current date using the
+	This method creates the Date object for the current date using the
 	Calendar class. It stores the current day, month, and year in their
 	respective variables.
 	*/
@@ -51,11 +60,6 @@ public class Date implements Comparable<Date> {
 		currMonth++; 
 		currYear = todaysDate.get(Calendar.YEAR);
 		currDay = todaysDate.get(Calendar.DAY_OF_MONTH);
-		
-		//test to see if todays date is printed out right
-		System.out.println("current day is: " + currDay);
-		System.out.println("current month is: " + currMonth);
-		System.out.println("current year is: " + currYear);
 	} 
 	
 	/**
@@ -83,7 +87,7 @@ public class Date implements Comparable<Date> {
 	}
 	
 	/**
-	The method checks if the date published passed through input is valid 
+	This method checks if the date published passed through input is valid 
 	and meets certain requirements to be authentic to be stored in the Kiosk
 	library
 	@return boolean if date is valid
@@ -152,10 +156,6 @@ public class Date implements Comparable<Date> {
 				}
 			}
 			return true;
-	}
-	@Override
-	public int compareTo(Date date) { 
-		return 0;
 	}
 	
 }
