@@ -17,17 +17,15 @@ public class Employee {
 	@param name of employe, department code, date hired
 	@param date published
 	*/
-	public Employee(String name, String department, Date date) {
-		profile.setName(name);
-		profile.setDepartment(department);
-		profile.setDate(date);
+	public Employee(Profile profile) {
+		this.profile = profile;
 	}
 	
 	/**
 	This method gets the Date hired from the Profile class so it 
 	can be used in other classes.
 	 */
-	public Date getDateHired() { //REDUNDANT(also in profile class)!! lmk if you know a better way to do it
+	public Date getDate() { //REDUNDANT(also in profile class)!! lmk if you know a better way to do it
 		return profile.getDateHired();
 	}
 	
@@ -58,13 +56,13 @@ public class Employee {
 	number, name, date published, and checked out status).
 	@return string description
 	*/
-	@Override 
+	/*@Override 
 	public String toString() { 
 		String name = profile.getName();
 		String depCode = profile.getDepCode();
 		Date date = profile.getDateHired();
 		return name+"::"+depCode+"::"+String.valueOf(date.getMonth())
 		+"/"+String.valueOf(date.getDay())+"/"
-		+String.valueOf(date.getYear())+"::is checked out."
-	} 
+		+String.valueOf(date.getYear())+"::PARTTIME"
+	}*/ 
 }

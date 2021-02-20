@@ -3,6 +3,12 @@ public class Profile {
 	private String name;//employee's name in the form "lastname, firstname"
 	private String department; //department code CS, ECE, IT
 	private Date dateHired;
+
+	public Profile(String name, String department, Date dateHired) {
+	this.name = name;
+	this.department = department;
+	this.dateHired = dateHired;
+	}
 	//@Override
 	//public String toString() { } //commented out for now to test
 	@Override
@@ -34,7 +40,7 @@ public class Profile {
 		this.dateHired=dateHired;
 	}
 	/**
-	Getter method for date hired of the employee so it can be used in other 
+	/*Getter method for date hired of the employee so it can be used in other 
 	classes
 	@return date hired
 	*/
@@ -45,7 +51,7 @@ public class Profile {
 	Getter method for department code of the employee so it can be used in 
 	other classes
 	@return date hired
-	*/
+	*/ 
 	public String getDepCode() {
 		return department;
 	}

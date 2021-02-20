@@ -44,8 +44,9 @@ public class Company {
 	when it's full and only add the employee if their profile is valid. 
 	@param employee to be added
 	*/
-	public boolean add(Employee employee) { 
-		if(employee.getDateHired().isValid()) {
+	public boolean add(Employee employee) {
+		Date date = employee.getDate();
+		if(date.isValid()) {
 			if(emplist.length==numEmployee) { //list full
 				grow();
 			} 
@@ -130,7 +131,7 @@ public class Company {
 	Method to print the earning statements for all the employers in the company
 	by the order of date from the employee list
 	 */
-	public void printByDate() { 
+/*	public void printByDate() { 
 		if(numEmployee>0) {
 			System.out.println("--Printing earning statements by date hired--");
 			
@@ -142,7 +143,7 @@ public class Company {
 		else {
 			System.out.println("Employee database is empty.");
 		}
-	} 
+	} */ 
 	
 	/**
 	Helper method to merge sort the employees in order of dates hired
@@ -150,13 +151,13 @@ public class Company {
 	@param left index
 	@param right index
 	*/
-	public static void mergeSortDate(Employee[] emplist, int left, int right) { 
+	/*public static void mergeSortDate(Employee[] emplist, int left, int right) { 
 		if(right<=left) return;
 		int mid=(left+right)/2; //left, right, mid are indexes
 		mergeSortDate(emplist,left,mid);
 		mergeSortDate(emplist,mid+1,right);
 		mergeDate(emplist,left,mid,right);
-	}
+	}*/
 	
 	/**
 	Helper method to merge two arrays together so it can be sorted in order 
@@ -179,7 +180,7 @@ public class Company {
 		int rightIndex=0;
 		for(int k=left;k<right+1;k++) {
 			if(leftIndex<mid-left+1 && rightIndex<right-mid) { //setter, getter constructors for book
-				if((leftEmployee[leftIndex].getDateHired().getYear()
+				if((leftEmployee[leftIndex].getDate().getYear()
 								<rightEmployee[rightIndex].getDateHired().getYear())
 						|| (leftEmployee[leftIndex].getDateHired().getYear()
 								==rightEmployee[rightIndex].getDateHired().getYear() 

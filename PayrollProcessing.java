@@ -28,24 +28,15 @@ public class PayrollProcessing {
 		while(!line.equals("Q")) {
 			StringTokenizer st=new StringTokenizer(line," ",false);
 			String command=st.nextToken(); 
-		
 			if(command.equals("AP")) { //part-time employee w hourly pay rate
 			String name = st.nextToken();
 			String depCode = st.nextToken();
 			String date = st.nextToken();
 			Date datePublished = new Date(date);
-			Employee employee = new Employee(name, depCode, datePublished);
-			String moneyEarned = st.nextToken();
-			if((depCode.equals("CS")) || (depCode.equals("ECE")) || (depCode.equals("IT"))) {
-			    //call add method here and also check if employee already exists or not
-				if(company.add(employee)) {
-					System.out.println("Employee added.");
-				} else {
-					System.out.println("Employee already in the list.");
-				}
-			} else {
-				System.out.println("'" + depCode + "' is not a valid department code.");
-			}
+			Profile profile = new Profile(name, depCode, datePublished);
+			Employee employee = new Employee(profile);
+			String moneyPerHour = st.nextToken();
+			company.add(employee);
 			
 			} else if(command.equals("AF")) { //full-time employee w annual salary
 				
