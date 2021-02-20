@@ -159,8 +159,9 @@ public class Company {
 	}
 	
 	/**
-	Helper method to merge two arrays together so it can be sorted in order of dates published
-	@param books array
+	Helper method to merge two arrays together so it can be sorted in order 
+	of employee dates hired
+	@param employee array
 	@param left index
 	@param mid index
 	@param right index
