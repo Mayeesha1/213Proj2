@@ -44,21 +44,39 @@ public class PayrollProcessing {
 				String NAME = st.nextToken();
 				String DEP_CODE = st.nextToken();
 				String DATE = st.nextToken();
+				String PER_YEAR = st.nextToken();
+				double ANNUAL_SALARY = Double.parseDouble(PER_YEAR);
 				Profile profile = new Profile(NAME, DEP_CODE, DATE);
 				Employee employee = new Employee(profile);
-				String ANNUAL_SALARY = st.nextToken();
-				company.add(employee);
+				Fulltime fulltime = new Fulltime(profile, ANNUAL_SALARY);
+				company.add(fulltime);
 
 			} else if(command.equals("AM")) { //full-time employee w diff roles
 				String NAME = st.nextToken();
 				String DEP_CODE = st.nextToken();
 				String DATE = st.nextToken();
+				String PER_YEAR = st.nextToken();
+				double ANNUAL_SALARY = Double.parseDouble(PER_YEAR);
+				String ROLE = st.nextToken();
 				Profile profile = new Profile(NAME, DEP_CODE, DATE);
 				Employee employee = new Employee(profile);
-				String ANNUAL_SALARY = st.nextToken();
-				String ROLE = st.nextToken();
-				
+				Management management = new Management(profile, ANNUAL_SALARY, ROLE);
+				if((DEP_CODE.equals("CS")) || (DEP_CODE.equals("ECE")) || (DEP_CODE.equals("IT"))) {
+				company.add(management); 
+				} else { 
+					System.out.println("'" + DEP_CODE + "' is not a valid department code.");
+				}
 			} else if(command.equals("R")) { //remove employee
+				String NAME = st.nextToken();
+				String DEP_CODE = st.nextToken();
+				String DATE = st.nextToken();
+				Profile profile = new Profile(NAME, DEP_CODE, DATE);
+				Employee employee = new Employee(profile);
+				if(company.remove(employee)) {
+					System.out.println("Employee removed.");
+				} else {
+					System.out.println("Employee database is empty.");
+				}
 				
 			} else if(command.equals("C")) { //calculate payments
 				

@@ -81,6 +81,9 @@ public class Company {
 			numEmployee++; //increase employee count
 			return true;
 		}
+		Date date = employee.getDate();
+		System.out.println(date.getMonth() +"/" + date.getDay() + "/" 
+		+ date.getYear() + " is not a valid date!");
 		return false;
 	} 
 	
@@ -96,14 +99,19 @@ public class Company {
 		if(index>-1) {
 			for(int i=index; i<emplist.length-1; i++) {
 				emplist[i] = emplist[i+1];
+				System.out.println("Employee removed.");
 			}
 			if(numEmployee == emplist.length) { //put a null space
 				emplist[emplist.length-1] = null; 
 			}
 			numEmployee--;
 			return true;
-		}
+		} else if(index == -1) {
+			emplist[0] = null;
+			return true;
+		} else {
 		return false;
+		}
 	}
 	
 	/**
@@ -119,7 +127,9 @@ public class Company {
 	to ensure that the employees receive their proper payments by processing them.
 	(better description?) 
 	*/
-	public void processPayments() { } 
+	public void processPayments() {
+		
+	} 
 	
 	/**
 	Method to print the earning statements for all the employers in the company
