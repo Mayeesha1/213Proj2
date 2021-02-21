@@ -1,4 +1,3 @@
-import Proj1.Book;
 
 /**
 The employee class holds all the main attributes of an employee. The employee object is created
@@ -14,11 +13,19 @@ public class Employee {
 	This constructor uses the name of an employee, the department, and the date published 
 	to connect the information to the Profile class where all three attributes are held 
 	for each employee.
-	@param name of employe, department code, date hired
+	@param name of employee, department code, date hired
 	@param date published
 	*/
 	public Employee(Profile profile) {
-		this.profile = profile;
+	this.profile = profile;
+	}
+	
+	public Profile getProfile() { //**idk but did this in book for date ig
+		return profile;
+	}
+	
+	public void calculatePayment() { 
+	
 	}
 	
 	/**
@@ -30,14 +37,6 @@ public class Employee {
 	}
 	
 	/**
-	This method calculates the payments for an employee, keeping 
-	in mind the total hours they worked. (fix if im wrong later...)
-	 */
-	public void calculatePayment() {
-		
-	} 
-	
-	/**
 	This method checks if employees are equal and already in the database(?)
 	@param obj of type employee to check with another employee object
 	@return true if employees are equal, false if not
@@ -46,23 +45,17 @@ public class Employee {
 	public boolean equals(Object obj) {
 		if(obj instanceof Employee) {
 			Employee employee=(Employee) obj;
-			//return employee.?.equals(this.?); //not sure what to return yet?
+			return employee.profile.equals(this.profile);
 		}
 		return false;
 	}
-	
 	/**
 	The method creates a string description of an employee and thier profile (serial
 	number, name, date published, and checked out status).
 	@return string description
 	*/
-	/*@Override 
+	@Override  
 	public String toString() { 
-		String name = profile.getName();
-		String depCode = profile.getDepCode();
-		Date date = profile.getDateHired();
-		return name+"::"+depCode+"::"+String.valueOf(date.getMonth())
-		+"/"+String.valueOf(date.getDay())+"/"
-		+String.valueOf(date.getYear())+"::PARTTIME"
-	}*/ 
+		return profile.toString();
+	} 
 }

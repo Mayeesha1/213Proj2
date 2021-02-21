@@ -18,8 +18,19 @@ public class Date implements Comparable<Date> {
 	*/
 	@Override
 	public int compareTo(Date date) { 
-		return 0;
+		if(this.year==date.getYear() && this.month==date.getMonth() && day==date.getDay()) {
+			return 0;
+		}
+		else if((this.year<date.getYear()) || (this.year==date.getYear() 
+				&& this.month<date.getMonth()) || (this.year==date.getYear() 
+				&& this.month==date.getMonth() && this.day<date.getDay())) {
+			return -1;
+		}
+		else {
+			return 1;
+		}
 	}
+	
 	/**
 	This method creates the Date object from what was scanned through 
 	user input and puts them in their respective variables. The day, month,

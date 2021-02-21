@@ -1,4 +1,3 @@
-import Proj1.Book;
 
 /**
 The company class stores all the employees in an array-based list. These employees can 
@@ -9,6 +8,10 @@ public class Company {
 	private Employee[] emplist;
 	private int numEmployee;
 	
+	public Company() {
+		emplist = new Employee[0];
+		numEmployee = 0;
+	}
 	/**
 	Method used to help other methods find an employee in the employee list and 
 	return the index of the employee in the employee list
@@ -18,7 +21,7 @@ public class Company {
 	private int find(Employee employee) { 
 		int count= 0;
 		while(count<numEmployee) {
-			if(emplist[count].equals(emplist)) {
+			if(emplist[count].equals(employee)) {
 				return count; //index in array not serial num
 			}
 			count++;
@@ -45,13 +48,25 @@ public class Company {
 	@param employee to be added
 	*/
 	public boolean add(Employee employee) {
-		Date date = employee.getDate();
-		if(date.isValid()) {
+
+		if(numEmployee > 0) {
+		int ARR_LENGTH = emplist.length - numEmployee;
+		for(int i = 0; i < emplist.length - ARR_LENGTH; i++) {
+			if(emplist[i].getProfile().equals(employee.getProfile())) {
+				System.out.println("Employee is already in the list.");
+				return false;
+			}
+		  }
+		}
+	
+		if(employee.getDate().isValid()) {
 			if(emplist.length==numEmployee) { //list full
 				grow();
 			} 
 			if(numEmployee==0) {
-				emplist[0] = employee; //all empty slots	
+				emplist[0] = employee; //all empty slots
+				System.out.println("Employee added.");
+				numEmployee++;
 				return true;
 			}
 			else {
@@ -60,6 +75,7 @@ public class Company {
 					ptr--;
 				}
 				emplist[ptr+1] = employee;
+				System.out.println("Employee added.");
 				
 			}
 			numEmployee++; //increase employee count
@@ -127,11 +143,14 @@ public class Company {
 	 */
 	public void printByDepartment() { } 
 	
+	public void sortEachDepartment() {
+	}
+	
 	/**
 	Method to print the earning statements for all the employers in the company
 	by the order of date from the employee list
 	 */
-/*	public void printByDate() { 
+	public void printByDate() { 
 		if(numEmployee>0) {
 			System.out.println("--Printing earning statements by date hired--");
 			
@@ -143,7 +162,7 @@ public class Company {
 		else {
 			System.out.println("Employee database is empty.");
 		}
-	} */ 
+	} 
 	
 	/**
 	Helper method to merge sort the employees in order of dates hired
@@ -151,13 +170,13 @@ public class Company {
 	@param left index
 	@param right index
 	*/
-	/*public static void mergeSortDate(Employee[] emplist, int left, int right) { 
+	public static void mergeSortDate(Employee[] emplist, int left, int right) { 
 		if(right<=left) return;
 		int mid=(left+right)/2; //left, right, mid are indexes
 		mergeSortDate(emplist,left,mid);
 		mergeSortDate(emplist,mid+1,right);
 		mergeDate(emplist,left,mid,right);
-	}*/
+	}
 	
 	/**
 	Helper method to merge two arrays together so it can be sorted in order 
@@ -181,17 +200,17 @@ public class Company {
 		for(int k=left;k<right+1;k++) {
 			if(leftIndex<mid-left+1 && rightIndex<right-mid) { //setter, getter constructors for book
 				if((leftEmployee[leftIndex].getDate().getYear()
-								<rightEmployee[rightIndex].getDateHired().getYear())
-						|| (leftEmployee[leftIndex].getDateHired().getYear()
-								==rightEmployee[rightIndex].getDateHired().getYear() 
-							&& leftEmployee[leftIndex].getDateHired().getMonth()
-								<rightEmployee[rightIndex].getDateHired().getMonth())
-						|| (leftEmployee[leftIndex].getDateHired().getYear()
-								==rightEmployee[rightIndex].getDateHired().getYear() 
-							&& leftEmployee[leftIndex].getDateHired().getMonth()
-								==rightEmployee[rightIndex].getDateHired().getMonth() 
-							&& leftEmployee[leftIndex].getDateHired().getDay()
-								<rightEmployee[rightIndex].getDateHired().getDay())) {
+								<rightEmployee[rightIndex].getDate().getYear())
+						|| (leftEmployee[leftIndex].getDate().getYear()
+								==rightEmployee[rightIndex].getDate().getYear() 
+							&& leftEmployee[leftIndex].getDate().getMonth()
+								<rightEmployee[rightIndex].getDate().getMonth())
+						|| (leftEmployee[leftIndex].getDate().getYear()
+								==rightEmployee[rightIndex].getDate().getYear() 
+							&& leftEmployee[leftIndex].getDate().getMonth()
+								==rightEmployee[rightIndex].getDate().getMonth() 
+							&& leftEmployee[leftIndex].getDate().getDay()
+								<rightEmployee[rightIndex].getDate().getDay())) {
 					emplist[k]=leftEmployee[leftIndex];
 					leftIndex++;
 				}
