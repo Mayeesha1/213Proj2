@@ -44,7 +44,7 @@ additional compensations.
 		public String toString() { 
 			String pattern="###,000.00";
 			DecimalFormat df=new DecimalFormat(pattern);
-			return super.toString() + "::Payment" + df.format(payment) + "::FULL TIME::Annual Salary $" 
+			return super.toString() + "::Payment $" + df.format(payment) + "::FULL TIME::Annual Salary $" 
 					+ df.format(annualSalary);
 		} 
 	}

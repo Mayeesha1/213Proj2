@@ -48,24 +48,25 @@ public class Company {
 	@param employee to be added
 	*/
 	public boolean add(Employee employee) {
-
+		System.out.println(numEmployee);
 		if(numEmployee > 0) {
 		int ARR_LENGTH = emplist.length - numEmployee;
 		for(int i = 0; i < emplist.length - ARR_LENGTH; i++) {
+			System.out.println(ARR_LENGTH );
+			System.out.println(emplist.length);
 			if(emplist[i].getProfile().equals(employee.getProfile())) {
-				System.out.println("Employee is already in the list.");
+				System.out.println(i);
+				//System.out.println("Employee is already in the list.");
 				return false;
 			}
 		  }
 		}
-	
-		if(employee.getDate().isValid()) {
 			if(emplist.length==numEmployee) { //list full
 				grow();
 			} 
 			if(numEmployee==0) {
 				emplist[0] = employee; //all empty slots
-				System.out.println("Employee added.");
+				//System.out.println("Employee added.");
 				numEmployee++;
 				return true;
 			}
@@ -75,16 +76,11 @@ public class Company {
 					ptr--;
 				}
 				emplist[ptr+1] = employee;
-				System.out.println("Employee added.");
+				//System.out.println("Employee added.");
 				
 			}
 			numEmployee++; //increase employee count
 			return true;
-		}
-		Date date = employee.getDate();
-		System.out.println(date.getMonth() +"/" + date.getDay() + "/" 
-		+ date.getYear() + " is not a valid date!");
-		return false;
 	} 
 	
 	/**
@@ -99,19 +95,14 @@ public class Company {
 		if(index>-1) {
 			for(int i=index; i<emplist.length-1; i++) {
 				emplist[i] = emplist[i+1];
-				System.out.println("Employee removed.");
 			}
 			if(numEmployee == emplist.length) { //put a null space
 				emplist[emplist.length-1] = null; 
 			}
 			numEmployee--;
 			return true;
-		} else if(index == -1) {
-			emplist[0] = null;
-			return true;
-		} else {
-		return false;
 		}
+		return false; //doesnt exist
 	}
 	
 	/**
@@ -119,7 +110,17 @@ public class Company {
 	@param part time employee's hours to be set
 	*/
 	public boolean setHours(Employee employee) {
-		return true; //just for now 
+		if(numEmployee == 0){
+			System.out.println("Employee database is empty.");
+		}
+		if(employee instanceof Parttime) { //or just employee.getProfile().getDepartment() idk
+			int index=find(employee);
+			if(index>-1) { //exists
+				return true;
+			}
+			return false; //idk if possible to not have employee/no print for it
+		}
+		return false;
 	} 
 	
 	/**
@@ -128,7 +129,30 @@ public class Company {
 	(better description?) 
 	*/
 	public void processPayments() {
-		
+		 if(numEmployee == 0){
+				System.out.println("Employee database is empty.");
+		 }
+		 if(numEmployee > 0){
+				System.out.println("Calculation of employee payments is done.");
+		 }
+		 if (numEmployee > 0) {
+		for(int i=0; i<numEmployee; i++) {
+			if(emplist[i] instanceof Fulltime) {
+				if(emplist[i] instanceof Management) {
+					Management management=(Management) emplist[i];
+					management.calculatePayment();
+				}
+				else {
+					Fulltime fulltime=(Fulltime) emplist[i];
+					fulltime.calculatePayment();
+				}
+			} 
+			else if(emplist[i] instanceof Parttime){ //parttime
+				Parttime parttime=(Parttime) emplist[i];
+				parttime.calculatePayment();
+			}
+		}
+	  }
 	} 
 	
 	/**
@@ -151,9 +175,77 @@ public class Company {
 	Method to print the earning statements for all the employers in the company
 	by the order of their Department from the employee list
 	 */
-	public void printByDepartment() { } 
+	public void printByDepartment() { //**idk how sorted besides just cs ece it
+		if(numEmployee>0) {
+			System.out.println("--Printing earning statements by department--");		
+			mergeSortDept(emplist,0,numEmployee-1);
+			for(int i=0; i<numEmployee; i++) {
+				System.out.println(emplist[i].toString());
+			}
+		}
+		else {
+			System.out.println("Employee database is empty.");
+		}
+	}
 	
-	public void sortEachDepartment() {
+	/**
+	Helper method to merge sort the employees in order of department
+	@param employee list array
+	@param left index
+	@param right index
+	*/
+	public static void mergeSortDept(Employee[] emplist, int left, int right) { 
+		if(right<=left) return;
+		int HALF=2;
+		int mid=(left+right)/HALF; //left, right, mid are indexes
+		mergeSortDept(emplist,left,mid);
+		mergeSortDept(emplist,mid+1,right);
+		mergeDept(emplist,left,mid,right);
+	}
+	
+	/**
+	Helper method to merge two arrays together so it can be sorted in order of department
+	@param employee list array
+	@param left index
+	@param mid index
+	@param right index
+	*/
+	public static void mergeDept(Employee[] emplist, int left, int mid, int right) {
+		Employee[] leftEmplist=new Employee[mid-left+1];
+		Employee[] rightEmplist=new Employee[right-mid];
+		for(int i=0;i<mid-left+1;i++) {
+			leftEmplist[i]=emplist[left+i];
+		}
+		for(int j=0;j<right-mid;j++) {
+			rightEmplist[j]=emplist[mid+j+1];
+		}
+		int leftIndex=0;
+		int rightIndex=0;
+		for(int k=left;k<right+1;k++) {
+			if(leftIndex<mid-left+1 && rightIndex<right-mid) { //setter, getter constructors for book
+				if((leftEmplist[leftIndex].getProfile().getDepartment().equals("CS") &&
+								rightEmplist[rightIndex].getProfile().getDepartment().equals("ECE"))
+						|| (leftEmplist[leftIndex].getProfile().getDepartment().equals("CS") &&
+								rightEmplist[rightIndex].getProfile().getDepartment().equals("IT"))
+						|| (leftEmplist[leftIndex].getProfile().getDepartment().equals("ECE") &&
+								rightEmplist[rightIndex].getProfile().getDepartment().equals("IT"))) {
+					emplist[k]=leftEmplist[leftIndex];
+					leftIndex++;
+				}
+				else {
+					emplist[k]=rightEmplist[rightIndex];
+					rightIndex++;
+				}
+			}
+			else if(leftIndex<mid-left+1) {
+				emplist[k]=leftEmplist[leftIndex];
+				leftIndex++;
+			}
+			else if(rightIndex<right-mid) {
+				emplist[k]=rightEmplist[rightIndex];
+				rightIndex++;
+			}
+		}
 	}
 	
 	/**

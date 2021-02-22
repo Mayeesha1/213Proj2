@@ -14,10 +14,10 @@ public class Management extends Fulltime {
 	public Management(Profile profile, double annualSalary, String role) {
 		super(profile, annualSalary);
 		this.role=role;
-		if(role.equals("Manager")) {
+		if(role.equals("1")) { //Manager
 			additionalComp=192.31;
 		}
-		else if(role.equals("Department Head")) {
+		else if(role.equals("2")) { //Department Head
 			additionalComp=365.38;
 		}
 		else { //Director

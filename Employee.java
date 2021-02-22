@@ -25,8 +25,12 @@ public class Employee {
 	}
 	
 	public void calculatePayment() { 
-	
+	//...
 	}
+	public String getdepCode() { //**idk but did this in book for date ig
+		return profile.getDepartment();
+	}
+	
 	
 	/**
 	This method gets the Date hired from the Profile class so it 

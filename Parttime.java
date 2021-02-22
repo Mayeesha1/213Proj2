@@ -45,7 +45,7 @@ public class Parttime extends Employee {
 	public String toString() { 
 		String pattern="###,000.00";
 		DecimalFormat df=new DecimalFormat(pattern);
-		return super.toString() + "::Payment" + df.format(payment) + "::PART TIME::Hourly Rate $" 
+		return super.toString() + "::Payment $" +df.format(payment) + "::PART TIME::Hourly Rate $" 
 				+ df.format(hourlyRate) + "::Hours worked this period: " + hours;
 	} 
 }

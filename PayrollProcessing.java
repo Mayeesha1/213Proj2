@@ -38,7 +38,18 @@ public class PayrollProcessing {
 			Profile profile = new Profile(NAME, DEP_CODE, DATE);
 			Employee employee = new Employee(profile);
 			Parttime parttime = new Parttime(profile, HOURLY_RATE);
-			company.add(parttime);
+			if(!(DEP_CODE.equals("CS") || DEP_CODE.equals("ECE") || DEP_CODE.equals("IT"))) {
+				System.out.println("'" + DEP_CODE + "'" + " is not a valid department code.");
+			}
+			else if(!parttime.getProfile().getDateHired().isValid()) {
+				System.out.println(DATE + " is not a valid date!");
+			}
+			else if(company.add(parttime)) {
+					System.out.println("Employee added.");
+				} else {
+					System.out.println("Employee already in the list.");
+				}
+			 		
 			
 			} else if(command.equals("AF")) { //full-time employee w annual salary
 				String NAME = st.nextToken();
@@ -49,7 +60,20 @@ public class PayrollProcessing {
 				Profile profile = new Profile(NAME, DEP_CODE, DATE);
 				Employee employee = new Employee(profile);
 				Fulltime fulltime = new Fulltime(profile, ANNUAL_SALARY);
-				company.add(fulltime);
+				if(!(DEP_CODE.equals("CS") || DEP_CODE.equals("ECE") || DEP_CODE.equals("IT"))) {
+					System.out.println("'" + DEP_CODE + "'" + " is not a valid department code.");
+				}
+				else if(!fulltime.getProfile().getDateHired().isValid()) {
+					System.out.println(DATE + " is not a valid date!");
+				}
+				else {
+					if(company.add(fulltime)) {
+						System.out.println("Employee added.");
+					}
+					else {
+						System.out.println("Employee already in the list.");
+					}
+				} 
 
 			} else if(command.equals("AM")) { //full-time employee w diff roles
 				String NAME = st.nextToken();
@@ -58,14 +82,39 @@ public class PayrollProcessing {
 				String PER_YEAR = st.nextToken();
 				double ANNUAL_SALARY = Double.parseDouble(PER_YEAR);
 				String ROLE = st.nextToken();
+				int INT_CODE = Integer.parseInt(ROLE);
 				Profile profile = new Profile(NAME, DEP_CODE, DATE);
 				Employee employee = new Employee(profile);
 				Management management = new Management(profile, ANNUAL_SALARY, ROLE);
-				if((DEP_CODE.equals("CS")) || (DEP_CODE.equals("ECE")) || (DEP_CODE.equals("IT"))) {
-				company.add(management); 
-				} else { 
-					System.out.println("'" + DEP_CODE + "' is not a valid department code.");
+				int MANAGER_CODE=1;
+				int DEPARTMENT_HEAD_CODE=2;
+				int DIRECTOR_CODE=3;
+				if(INT_CODE==MANAGER_CODE) {
+					management.setRole("Manager");
 				}
+				else if(INT_CODE==DEPARTMENT_HEAD_CODE) {
+					management.setRole("Department Head");
+				}
+				else if(INT_CODE==DIRECTOR_CODE) {
+					management.setRole("Director");
+				}
+				else {
+					System.out.println("Invalid management code.");
+				}
+				if(!(DEP_CODE.equals("CS") || DEP_CODE.equals("ECE") || DEP_CODE.equals("IT"))) {
+					System.out.println("'" + DEP_CODE + "'" + " is not a valid department code.");
+				}
+				else if(!management.getProfile().getDateHired().isValid()) { 
+					System.out.println(DATE + " is not a valid date!");
+				}
+				else if(company.add(management) && ((INT_CODE == 1) || (INT_CODE == 2) || (INT_CODE == 3))) {
+						System.out.println("ur boolean value is: " + company.add(management));
+						System.out.println("Employee added.");
+				}  
+					if(/*!company.add(management) &&*/ ((INT_CODE == 1) || (INT_CODE == 2) || (INT_CODE == 3))){
+						System.out.println("Employee already in the list." + company.add(management));
+					}
+				 			
 			} else if(command.equals("R")) { //remove employee
 				String NAME = st.nextToken();
 				String DEP_CODE = st.nextToken();
@@ -79,14 +128,34 @@ public class PayrollProcessing {
 				}
 				
 			} else if(command.equals("C")) { //calculate payments
+				company.processPayments();
 				
 			} else if(command.equals("S")) { //set hours for employee
+				String NAME=st.nextToken();
+				String DEP_CODE=st.nextToken();
+				String DATE=st.nextToken();
+				double HOURS = Double.parseDouble(st.nextToken());
+				Profile profile = new Profile(NAME, DEP_CODE, DATE);
+				Employee employee = new Employee(profile);
+				if(HOURS<0) {
+					System.out.println("Working hours cannot be negative.");
+				}
+				else if(HOURS>100) {
+					System.out.println("Invalid Hours: over 100.");
+				}
+				else {
+					if(company.setHours(employee)) {
+						System.out.println("Working hours set.");
+					}
+				}
 				
 			} else if(command.equals("PA")) { //earnings for all employees
 				company.print();
 			} else if(command.equals("PH")) { //earnings by date hired
+				company.printByDate();
 				
 			} else if(command.equals("PD")) { //earnings grouped by department
+				company.printByDepartment();
 				
 			} else {
 				System.out.println("Command '" + command + "' is not supported!");
@@ -97,7 +166,7 @@ public class PayrollProcessing {
 		scanner.close();
 		//} catch (Exception e) {
 			//  System.out.println("Exception error! Please recheck input!");
-		//	}
+		//}
 		
 		
 	}
