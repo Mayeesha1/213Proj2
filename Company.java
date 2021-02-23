@@ -49,6 +49,7 @@ public class Company {
 	Method to add an employee to the employee list. Also, we grow the list capacity 
 	when it's full and only add the employee if their profile is valid. 
 	@param employee to be added
+	@return true if added, false if not in database
 	*/
 	public boolean add(Employee employee) {
 		   if(find(employee) == -1) {
@@ -100,6 +101,7 @@ public class Company {
 	Method to set a part time employees working hours by interacting with the employee
 	object directly.
 	@param part time employee's hours to be set
+	@return true if hours were set, false if not
 	*/
 	public boolean setHours(Employee employee) {
 		int index=find(employee);
@@ -155,9 +157,9 @@ public class Company {
 	} 
 	
 	/**
-	Getter method for numEmployee of the company class so it can be used in other 
-	classes
-	@return date hired
+	Getter method for numEmployee of the company class so it can be used in 
+	the payroll processing class
+	@return numEmployee
 	*/
 	public int getnumEmployee() {
 		return numEmployee;

@@ -65,16 +65,16 @@ public class PayrollProcessing {
 				else if(!fulltime.getProfile().getDateHired().isValid()) {
 					System.out.println(DATE + " is not a valid date!");
 				}
-				else {
-					if(ANNUAL_SALARY > 0 && company.add(fulltime)==true) {
+				else if(ANNUAL_SALARY > 0 && company.add(fulltime)==true) {
 						System.out.println("Employee added.");
 					}
-					else if(ANNUAL_SALARY > 0 && company.add(fulltime)==false){
+				else if(ANNUAL_SALARY > 0 && company.add(fulltime)==false){
 						System.out.println("Employee already in the list.");
-					} else {
+				    } 
+				else if(ANNUAL_SALARY < 0){
 						System.out.println("Salary cannot be negative.");
 					}
-				} 
+			 
 
 			} else if(command.equals("AM")) { //full-time employee w diff roles
 				String NAME = st.nextToken();
