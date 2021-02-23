@@ -8,10 +8,14 @@ public class Company {
 	private Employee[] emplist;
 	private int numEmployee;
 	
+	/**
+	Default constructor for an empty list
+	*/
 	public Company() {
 		emplist = new Employee[0];
 		numEmployee = 0;
 	}
+	
 	/**
 	Method used to help other methods find an employee in the employee list and 
 	return the index of the employee in the employee list
@@ -21,12 +25,11 @@ public class Company {
 	private int find(Employee employee) { 
 		int count= 0;
 		while(count<numEmployee) {
-			if(emplist[count].equals(employee)) {
+			if(emplist[count].getProfile().equals(employee.getProfile())) {
 				return count; //index in array not serial num
 			}
 			count++;
 		}
-		//return  count; //equals numEmployee
 		return -1;
 	}
 	
@@ -48,25 +51,12 @@ public class Company {
 	@param employee to be added
 	*/
 	public boolean add(Employee employee) {
-		System.out.println(numEmployee);
-		if(numEmployee > 0) {
-		int ARR_LENGTH = emplist.length - numEmployee;
-		for(int i = 0; i < emplist.length - ARR_LENGTH; i++) {
-			System.out.println(ARR_LENGTH );
-			System.out.println(emplist.length);
-			if(emplist[i].getProfile().equals(employee.getProfile())) {
-				System.out.println(i);
-				//System.out.println("Employee is already in the list.");
-				return false;
-			}
-		  }
-		}
+		   if(find(employee) == -1) {
 			if(emplist.length==numEmployee) { //list full
 				grow();
 			} 
 			if(numEmployee==0) {
 				emplist[0] = employee; //all empty slots
-				//System.out.println("Employee added.");
 				numEmployee++;
 				return true;
 			}
@@ -76,11 +66,12 @@ public class Company {
 					ptr--;
 				}
 				emplist[ptr+1] = employee;
-				//System.out.println("Employee added.");
 				
 			}
 			numEmployee++; //increase employee count
 			return true;
+		}
+		return false;
 	} 
 	
 	/**
@@ -106,37 +97,28 @@ public class Company {
 	}
 	
 	/**
-	Method to set a part time employees working hours.
+	Method to set a part time employees working hours by interacting with the employee
+	object directly.
 	@param part time employee's hours to be set
 	*/
 	public boolean setHours(Employee employee) {
-		if(numEmployee == 0){
-			System.out.println("Employee database is empty.");
+		int index=find(employee);
+		if(index>-1 && emplist[index] instanceof Parttime) { //exists and its parttime
+			((Parttime) emplist[index]).setHours(((Parttime) employee).getHours());
+			return true;
 		}
-		if(employee instanceof Parttime) { //or just employee.getProfile().getDepartment() idk
-			int index=find(employee);
-			if(index>-1) { //exists
-				return true;
-			}
-			return false; //idk if possible to not have employee/no print for it
-		}
-		return false;
+		return false; 	
 	} 
 	
 	/**
 	Method to process the payments for the employees in the company. This method is 
-	to ensure that the employees receive their proper payments by processing them.
-	(better description?) 
+	to ensure that the employees receive their proper payments by calling the 
+	calculatePayment methods in the other classes.
 	*/
 	public void processPayments() {
-		 if(numEmployee == 0){
-				System.out.println("Employee database is empty.");
-		 }
-		 if(numEmployee > 0){
-				System.out.println("Calculation of employee payments is done.");
-		 }
-		 if (numEmployee > 0) {
+		 if (numEmployee > 0 ) {
 		for(int i=0; i<numEmployee; i++) {
+			if(emplist[i].getPayment() == 0) {
 			if(emplist[i] instanceof Fulltime) {
 				if(emplist[i] instanceof Management) {
 					Management management=(Management) emplist[i];
@@ -151,7 +133,8 @@ public class Company {
 				Parttime parttime=(Parttime) emplist[i];
 				parttime.calculatePayment();
 			}
-		}
+		  }
+	    }
 	  }
 	} 
 	
@@ -172,10 +155,19 @@ public class Company {
 	} 
 	
 	/**
+	Getter method for numEmployee of the company class so it can be used in other 
+	classes
+	@return date hired
+	*/
+	public int getnumEmployee() {
+		return numEmployee;
+	}
+	
+	/**
 	Method to print the earning statements for all the employers in the company
 	by the order of their Department from the employee list
 	 */
-	public void printByDepartment() { //**idk how sorted besides just cs ece it
+	public void printByDepartment() { 
 		if(numEmployee>0) {
 			System.out.println("--Printing earning statements by department--");		
 			mergeSortDept(emplist,0,numEmployee-1);
@@ -281,7 +273,8 @@ public class Company {
 	}
 	
 	/**
-	Helper method to merge two arrays together so it can be sorted in order 
+	Helper method to merge two Date sorted arrays together so it can be sorted 
+	in order 
 	of employee dates hired
 	@param employee array
 	@param left index

@@ -1,47 +1,75 @@
 
 /**
 The employee class holds all the main attributes of an employee. The employee object is created
-and each employee has their own profile.
-(add more after i understand more LOL)...
+and each employee has their own profile and payment.
 @author mayeesha, rebecca
 */
 public class Employee {
-	//not sure what other instance variables to add for an employee
 	private Profile profile; 
+	private double payment;
 
 	/**
-	This constructor uses the name of an employee, the department, and the date published 
-	to connect the information to the Profile class where all three attributes are held 
-	for each employee.
-	@param name of employee, department code, date hired
-	@param date published
+	This constructor uses the Profile of an employee to connect the information 
+	to the Profile class where all three attributes are held for each employee.
+	@param employee's profile
 	*/
 	public Employee(Profile profile) {
 	this.profile = profile;
 	}
 	
-	public Profile getProfile() { //**idk but did this in book for date ig
+	/**
+	This method gets the profile of an employee from the Profile class so it can be 
+	used in other classes.
+	@return employee's profile
+	 */
+	public Profile getProfile() { 
 		return profile;
 	}
 	
+	/**
+	This method is the method that the other classes with the same method will override 
+	 */
 	public void calculatePayment() { 
 	//...
 	}
-	public String getdepCode() { //**idk but did this in book for date ig
+	
+	/**
+	Setter method for the payment of an employee so the value can be set in other classes
+	@param employee's payment
+	*/
+	public void setPayment(double payment) {
+		this.payment=payment;
+	}
+	
+	/**
+	Getter method for the payment of an employee it can be used in other classes.
+	@return employee's payment
+	 */
+	public double getPayment() { 
+		return payment;
+	}
+	
+	/**
+	Getter method for the department code of an employee from the profile class it can be 
+	used in other classes.
+	@return employee's department code (CS/IT/ECE)
+	 */
+	public String getdepCode() {
 		return profile.getDepartment();
 	}
 	
-	
 	/**
-	This method gets the Date hired from the Profile class so it 
-	can be used in other classes.
+	Getter method for the date hired from the profile class so it can be used in other 
+	classes.
+	@return employee's date hired
 	 */
 	public Date getDate() { //REDUNDANT(also in profile class)!! lmk if you know a better way to do it
 		return profile.getDateHired();
 	}
 	
 	/**
-	This method checks if employees are equal and already in the database(?)
+	This method checks if employee objects are equal and already in the database by comparing 
+	one employee's profile with another, and returns boolean values accordingly.
 	@param obj of type employee to check with another employee object
 	@return true if employees are equal, false if not
 	*/
@@ -53,9 +81,10 @@ public class Employee {
 		}
 		return false;
 	}
+	
 	/**
-	The method creates a string description of an employee and thier profile (serial
-	number, name, date published, and checked out status).
+	The method creates a string description of an employee and refers to the profile toString 
+	method to apply polymorphism in order to to print the output without repetitive code
 	@return string description
 	*/
 	@Override  
