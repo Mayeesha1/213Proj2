@@ -27,27 +27,28 @@ public class PayrollProcessing {
 			StringTokenizer st=new StringTokenizer(line," ",false);
 			String command=st.nextToken(); 
 			if(command.equals("AP")) { //part-time employee w hourly pay rate
-			String NAME = st.nextToken();
-			String DEP_CODE = st.nextToken();
-			String DATE = st.nextToken();
-			String PER_HOUR = st.nextToken();
-			double HOURLY_RATE = Double.parseDouble(PER_HOUR);
-			Profile profile = new Profile(NAME, DEP_CODE, DATE);
-			//Employee employee = new Employee(profile);
-			Parttime parttime = new Parttime(profile, HOURLY_RATE);
-			if(!(DEP_CODE.equals("CS") || DEP_CODE.equals("ECE") || DEP_CODE.equals("IT"))) {
+			   String NAME = st.nextToken();
+			   String DEP_CODE = st.nextToken();
+			   String DATE = st.nextToken();
+			   String PER_HOUR = st.nextToken();
+			   double HOURLY_RATE = Double.parseDouble(PER_HOUR);
+			   Profile profile = new Profile(NAME, DEP_CODE, DATE);
+			   //Employee employee = new Employee(profile);
+			   Parttime parttime = new Parttime(profile, HOURLY_RATE);
+			   if(!(DEP_CODE.equals("CS") || DEP_CODE.equals("ECE") || DEP_CODE.equals("IT"))) {
 				System.out.println("'" + DEP_CODE + "'" + " is not a valid department code.");
-			}
-			else if(!parttime.getProfile().getDateHired().isValid()) {
+			   }
+			   else if(!parttime.getProfile().getDateHired().isValid()) {
 				System.out.println(DATE + " is not a valid date!");
-			}
-			else if(HOURLY_RATE > 0 && company.add(parttime)) {
+			   }
+			   else if(HOURLY_RATE > 0 && company.add(parttime)) {
 					System.out.println("Employee added.");
-				} else if(HOURLY_RATE > 0 && company.add(parttime)==false){
+			   } 
+			   else if(HOURLY_RATE > 0 && company.add(parttime)==false){
 					System.out.println("Employee already in the list.");
-				} else {
+			   } else {
 					System.out.println("Pay rate cannot be negative.");
-				}
+			   }
 			 		
 			
 			} else if(command.equals("AF")) { //full-time employee w annual salary
@@ -175,12 +176,12 @@ public class PayrollProcessing {
 				System.out.println("Command '" + command + "' is not supported!");
 			}
 			line = scanner.nextLine();	
-		 }
+		 }  
 		    System.out.println("Payroll Processing completed."); //quit
 		    scanner.close();
-	   } catch (Exception e) {
-	    System.out.println("Exception error! Please recheck input!");
-	   }
-	}
+	    } catch (Exception e) {
+	       System.out.println("Exception error! Please recheck input!");
+	  }
+   }
 }
 

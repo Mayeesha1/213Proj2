@@ -15,7 +15,9 @@ public class Profile {
 	/**
 	This constructor uses the name, department code, and date hired of an employee to create 
 	a profile for them. 
-	@param employee's profile
+	@param name of employee
+	@param department of employee
+	@param date joined of an employee
 	*/
 	public Profile(String name, String department, String date) {
 		this.name=name;
@@ -25,7 +27,7 @@ public class Profile {
 	
 	/**
 	Setter method for the name of an employee so the value can be set in other classes
-	@param employee name
+	@param name of an employee to be set
 	*/
 	public void setName(String name) {
 		this.name=name;
@@ -33,7 +35,7 @@ public class Profile {
 	
 	/**
 	Setter method for the date an employee joined so the value can be set in other classes
-	@param date when employee joined
+	@param dateHired of an employee
 	*/
 	public void setDate(Date dateHired) {
 		this.dateHired=dateHired;

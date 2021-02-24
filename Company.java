@@ -100,7 +100,7 @@ public class Company {
 	/**
 	Method to set a part time employees working hours by interacting with the employee
 	object directly.
-	@param part time employee's hours to be set
+	@param employee object so hours can be set
 	@return true if hours were set, false if not
 	*/
 	public boolean setHours(Employee employee) {
@@ -184,7 +184,7 @@ public class Company {
 	
 	/**
 	Helper method to merge sort the employees in order of department
-	@param employee list array
+	@param emplist array to be sorted
 	@param left index
 	@param right index
 	*/
@@ -199,7 +199,7 @@ public class Company {
 	
 	/**
 	Helper method to merge two arrays together so it can be sorted in order of department
-	@param employee list array
+	@param emplist array to be sorted
 	@param left index
 	@param mid index
 	@param right index
@@ -262,7 +262,7 @@ public class Company {
 	
 	/**
 	Helper method to merge sort the employees in order of dates hired
-	@param employee array
+	@param emplist array to be sorted
 	@param left index
 	@param right index
 	*/
@@ -278,7 +278,7 @@ public class Company {
 	Helper method to merge two Date sorted arrays together so it can be sorted 
 	in order 
 	of employee dates hired
-	@param employee array
+	@param emplist array to be sorted
 	@param left index
 	@param mid index
 	@param right index

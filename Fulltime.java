@@ -14,8 +14,8 @@ public class Fulltime extends Employee {
 	/**
 	This constructor is extended from the superclass, employee, with an additional
 	parameter in specific to the type of employee(fulltime).
-	@param employee's profile
-	@param employee's annual salary
+	@param profile on an employee
+	@param annualSalary of an employee
 	*/
 	public Fulltime(Profile profile, double annualSalary) {
 		super(profile);

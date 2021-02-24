@@ -15,8 +15,8 @@ public class Parttime extends Employee {
 	/**
 	This constructor is extended from the superclass, Employee with an additional
 	parameter in specific to the type of employee(parttime).
-	@param employee's profile
-	@param employee's hourly rate
+	@param profile of an employee
+	@param hourlyRate of an employee
 	*/
 	public Parttime(Profile profile, double hourlyRate) {
 		super(profile);
@@ -27,7 +27,7 @@ public class Parttime extends Employee {
 	/**
 	Setter method for the hours worked of a parttime employee so the value can be set
 	in other  classes.
-	@param employee's payment
+	@param hours to be set for a parttime employee
 	*/
 	public void setHours(double hours) {
 		this.hours=hours;
