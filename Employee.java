@@ -11,7 +11,7 @@ public class Employee {
 	/**
 	This constructor uses the Profile of an employee to connect the information 
 	to the Profile class where all three attributes are held for each employee.
-	@param employee's profile
+	@param profile to be added to each employee
 	*/
 	public Employee(Profile profile) {
 	this.profile = profile;
@@ -20,7 +20,7 @@ public class Employee {
 	/**
 	This method gets the profile of an employee from the Profile class so it can be 
 	used in other classes.
-	@return employee's profile
+	@return profile of an employee
 	 */
 	public Profile getProfile() { 
 		return profile;
@@ -35,7 +35,7 @@ public class Employee {
 	
 	/**
 	Setter method for the payment of an employee so the value can be set in other classes
-	@param employee's payment
+	@param payment of an employee 
 	*/
 	public void setPayment(double payment) {
 		this.payment=payment;
@@ -43,7 +43,7 @@ public class Employee {
 	
 	/**
 	Getter method for the payment of an employee it can be used in other classes.
-	@return employee's payment
+	@return payment of an employee
 	 */
 	public double getPayment() { 
 		return payment;
@@ -63,7 +63,7 @@ public class Employee {
 	classes.
 	@return employee's date hired
 	 */
-	public Date getDate() { //REDUNDANT(also in profile class)!! lmk if you know a better way to do it
+	public Date getDate() { 
 		return profile.getDateHired();
 	}
 	

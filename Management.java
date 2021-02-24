@@ -16,9 +16,9 @@ public class Management extends Fulltime {
 	/**
 	This constructor is extended from the superclass, Fulltime with its superclass,
 	Employee, with additional parameters in specific to the type of employee(management).
-	@param employee's profile
-	@param employee's annual salary
-	@param employee's role 
+	@param profile of an employee
+	@param annualSalary of an employee
+	@param role of an employee
 	*/
 	public Management(Profile profile, double annualSalary, String role) {
 		super(profile, annualSalary);
@@ -29,7 +29,7 @@ public class Management extends Fulltime {
 	Setter method for the role of a management employee according to its specific
 	number, 1/2/3. The employee's additional compensation is set here as well which 
 	is just the annual salary divided by 26. 
-	@param employee's role
+	@param role of an employee
 	*/
 	public void setRole(String role) {
 		this.role=role;
